@@ -1,6 +1,8 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using ToDoAppAPI;
 using ToDoAppAPI.Entities;
+using ToDoAppAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ToDoAppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SwapAppDbConnection")));
 builder.Services.AddScoped<Seeder>();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<ITaskGroupService, TaskGroupService>();
 
 var app = builder.Build();
 var scope = app.Services.CreateScope();
