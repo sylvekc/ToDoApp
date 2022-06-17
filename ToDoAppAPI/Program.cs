@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ToDoAppAPI;
 using ToDoAppAPI.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +11,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ToDoAppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SwapAppDbConnection")));
+builder.Services.AddScoped<Seeder>();
 
 var app = builder.Build();
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<Seeder>();
+seeder.Seed();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
