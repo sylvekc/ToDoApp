@@ -13,7 +13,7 @@ namespace ToDoAppAPI
     {
         public MappingProfile()
         {
-            CreateMap<AddTaskGroupDto, TaskGroup>();
+            CreateMap<TaskGroupDto, TaskGroup>();
         }
     }
 }

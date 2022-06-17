@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ToDoAppAPI.Models
 {
-    public class AddTaskGroupDto
+    public class TaskGroupDto
     {
-        public string Name { get; set; }  
+        public string Name { get; set; }
     }
 }

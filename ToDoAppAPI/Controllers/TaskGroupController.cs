@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ToDoAppAPI.Entities;
 using ToDoAppAPI.Models;
 using ToDoAppAPI.Services;
 
@@ -20,10 +21,17 @@ namespace ToDoAppAPI.Controllers
             _taskGroupService = taskGroupService;
         }
         [HttpPost]
-        public ActionResult AddTaskGroup([FromForm]AddTaskGroupDto dto)
+        public ActionResult AddTaskGroup([FromForm]TaskGroupDto dto)
         {
             var taskGroupId = _taskGroupService.AddTaskGroup(dto);
             return Created($"/api/taskGroup/{taskGroupId}", null);
+        }
+
+        [HttpPatch("{id}")]
+        public ActionResult ChangeTaskGroupName([FromForm]TaskGroupDto dto, [FromRoute]int id)
+        {
+            _taskGroupService.UpdateTaskGroup(dto, id);
+            return Ok();
         }
     }
 }
