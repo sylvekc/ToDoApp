@@ -33,7 +33,6 @@ namespace ToDoAppAPI.Services
         public int AddTaskGroup(TaskGroupDto dto)
         {
             var taskGroup = _mapper.Map<TaskGroup>(dto);
-            taskGroup.Name = taskGroup.Name;
             _dbContext.TaskGroups.Add(taskGroup);
             _dbContext.SaveChanges();
             return taskGroup.Id;
@@ -46,7 +45,6 @@ namespace ToDoAppAPI.Services
             {
                 throw new NotFoundException($"Task group with ID {id} not found");
             }
-            taskGroup.Name = dto.Name;
             _dbContext.SaveChanges();
         }
 
