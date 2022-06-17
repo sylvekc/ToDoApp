@@ -33,5 +33,12 @@ namespace ToDoAppAPI.Controllers
             _taskGroupService.UpdateTaskGroup(dto, id);
             return Ok();
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteGroupName([FromRoute] int id)
+        {
+            _taskGroupService.DeleteTaskGroup(id);
+            return NoContent();
+        }
     }
 }

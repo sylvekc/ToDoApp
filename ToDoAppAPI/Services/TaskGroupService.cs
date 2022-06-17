@@ -14,7 +14,8 @@ namespace ToDoAppAPI.Services
     public interface ITaskGroupService
     {
         int AddTaskGroup(TaskGroupDto dto);
-        bool UpdateTaskGroup(TaskGroupDto dto, int id);
+        void UpdateTaskGroup(TaskGroupDto dto, int id);
+        void DeleteTaskGroup(int id);
     }
 
     public class TaskGroupService : ITaskGroupService
@@ -38,17 +39,26 @@ namespace ToDoAppAPI.Services
             return taskGroup.Id;
         }
 
-        public bool UpdateTaskGroup(TaskGroupDto dto, int id)
+        public void UpdateTaskGroup(TaskGroupDto dto, int id)
         {
             var taskGroup = _dbContext.TaskGroups.FirstOrDefault(x => x.Id == id);
             if (taskGroup == null)
             {
-                throw new NotFoundException($"Task group {taskGroup} doesn't exist");
+                throw new NotFoundException($"Task group with ID {id} not found");
             }
             taskGroup.Name = dto.Name;
-            _dbContext.TaskGroups.Update(taskGroup);
             _dbContext.SaveChanges();
-            return true;
+        }
+
+        public void DeleteTaskGroup(int id)
+        {
+            var taskGroup = _dbContext.TaskGroups.FirstOrDefault(x => x.Id == id);
+            if (taskGroup == null)
+            {
+                throw new NotFoundException($"Task group with ID {id} not found");
+            }
+            _dbContext.TaskGroups.Remove(taskGroup);
+            _dbContext.SaveChanges();
         }
 
     }
