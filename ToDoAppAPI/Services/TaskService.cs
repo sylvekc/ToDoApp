@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ToDoAppAPI.Entities;
 using ToDoAppAPI.Exceptions;
 using ToDoAppAPI.Models;
+using Task = ToDoAppAPI.Entities.Task;
 
 namespace ToDoAppAPI.Services
 {
@@ -14,6 +16,7 @@ namespace ToDoAppAPI.Services
     {
         int AddTask(AddTaskDto dto);
         void DeleteTask(int id);
+        IEnumerable<Task> GetAllTasks();
     }
 
     public class TaskService : ITaskService
@@ -44,6 +47,12 @@ namespace ToDoAppAPI.Services
             }
             _dbContext.Tasks.Remove(task);
             _dbContext.SaveChanges();
+        }
+
+        public IEnumerable<Task> GetAllTasks()
+        {
+            var tasks = _dbContext.Tasks;
+            return tasks;
         }
 
     }

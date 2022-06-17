@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoAppAPI.Entities;
 
@@ -11,9 +12,10 @@ using ToDoAppAPI.Entities;
 namespace ToDoAppAPI.Migrations
 {
     [DbContext(typeof(ToDoAppDbContext))]
-    partial class ToDoAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220617233721_AddFix")]
+    partial class AddFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,11 +104,13 @@ namespace ToDoAppAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ToDoAppAPI.Entities.User", null)
+                    b.HasOne("ToDoAppAPI.Entities.User", "User")
                         .WithMany("Tasks")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ToDoAppAPI.Entities.TaskGroup", b =>

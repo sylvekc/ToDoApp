@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoAppAPI.Entities;
 
@@ -11,9 +12,10 @@ using ToDoAppAPI.Entities;
 namespace ToDoAppAPI.Migrations
 {
     [DbContext(typeof(ToDoAppDbContext))]
-    partial class ToDoAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220617233850_AddFix1")]
+    partial class AddFix1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

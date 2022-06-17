@@ -12,9 +12,7 @@ namespace ToDoAppAPI.Entities
         public string Description { get; set; }
         public DateTime Deadline { get; set; }
         public int UserId { get; set; }
-        public virtual User User { get; set; }
         public string Status { get; set; }
         public int TaskGroupId { get; set; }
-        public virtual TaskGroup TaskGroup { get; set; }
     }
 }

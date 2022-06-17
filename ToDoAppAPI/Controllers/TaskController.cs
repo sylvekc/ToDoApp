@@ -32,5 +32,12 @@ namespace ToDoAppAPI.Controllers
             _taskService.DeleteTask(id);
             return NoContent();
         }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Task>> GetAllTasks()
+        {
+            var tasks = _taskService.GetAllTasks();
+            return Ok(tasks);
+        }
     }
 }
