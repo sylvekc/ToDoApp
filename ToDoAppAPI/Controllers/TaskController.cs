@@ -10,6 +10,7 @@ using ToDoAppAPI.Services;
 namespace ToDoAppAPI.Controllers
 {
     [Route("api/task")]
+    [ApiController]
     public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;

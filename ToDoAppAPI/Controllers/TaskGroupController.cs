@@ -11,6 +11,7 @@ using ToDoAppAPI.Services;
 namespace ToDoAppAPI.Controllers
 {
     [Route("api/taskGroup")]
+    [ApiController]
 
     public class TaskGroupController : ControllerBase
     {

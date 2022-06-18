@@ -33,6 +33,7 @@ namespace ToDoAppAPI.Services
         public int AddTask(AddTaskDto dto)
         {
             var task = _mapper.Map<Entities.Task>(dto);
+            task.Status = dto.Status.ToUpper();
             _dbContext.Tasks.Add(task);
             _dbContext.SaveChanges();
             return task.Id;

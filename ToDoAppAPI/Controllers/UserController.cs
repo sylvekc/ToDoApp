@@ -10,6 +10,7 @@ using ToDoAppAPI.Services;
 namespace ToDoAppAPI.Controllers
 {
     [Route("api/user")]
+    [ApiController]
 
     public class UserController : ControllerBase
     {
