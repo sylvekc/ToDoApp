@@ -18,6 +18,7 @@ builder.Services.AddScoped<Seeder>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<ITaskGroupService, TaskGroupService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
