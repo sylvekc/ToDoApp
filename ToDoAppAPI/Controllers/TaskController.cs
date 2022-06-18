@@ -19,6 +19,13 @@ namespace ToDoAppAPI.Controllers
             _taskService = taskService;
         }
 
+        [HttpGet]
+        public ActionResult<IEnumerable<Entities.Task>> GetAllTasks()
+        {
+            var tasks = _taskService.GetAllTasks();
+            return Ok(tasks);
+        }
+
         [HttpPost]
         public ActionResult AddTask([FromForm] AddTaskDto dto)
         {
@@ -33,11 +40,6 @@ namespace ToDoAppAPI.Controllers
             return NoContent();
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Task>> GetAllTasks()
-        {
-            var tasks = _taskService.GetAllTasks();
-            return Ok(tasks);
-        }
+        
     }
 }

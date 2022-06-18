@@ -16,7 +16,7 @@ namespace ToDoAppAPI.Services
     {
         int AddTask(AddTaskDto dto);
         void DeleteTask(int id);
-        IEnumerable<Task> GetAllTasks();
+        IEnumerable<Entities.Task> GetAllTasks();
     }
 
     public class TaskService : ITaskService
@@ -49,7 +49,7 @@ namespace ToDoAppAPI.Services
             _dbContext.SaveChanges();
         }
 
-        public IEnumerable<Task> GetAllTasks()
+        public IEnumerable<Entities.Task> GetAllTasks()
         {
             var tasks = _dbContext.Tasks;
             return tasks;

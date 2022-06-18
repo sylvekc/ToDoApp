@@ -20,6 +20,14 @@ namespace ToDoAppAPI.Controllers
         {
             _taskGroupService = taskGroupService;
         }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<TaskGroup>> GetAllTaskGroups()
+        {
+            var taskGroups = _taskGroupService.GetAllTaskGroups();
+            return Ok(taskGroups);
+        }
+
         [HttpPost]
         public ActionResult AddTaskGroup([FromForm]TaskGroupDto dto)
         {
@@ -40,5 +48,7 @@ namespace ToDoAppAPI.Controllers
             _taskGroupService.DeleteTaskGroup(id);
             return NoContent();
         }
+
+     
     }
 }

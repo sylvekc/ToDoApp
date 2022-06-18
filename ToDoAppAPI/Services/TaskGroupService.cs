@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ToDoAppAPI.Entities;
 using ToDoAppAPI.Exceptions;
 using ToDoAppAPI.Models;
@@ -16,6 +17,7 @@ namespace ToDoAppAPI.Services
         int AddTaskGroup(TaskGroupDto dto);
         void UpdateTaskGroup(TaskGroupDto dto, int id);
         void DeleteTaskGroup(int id);
+        IEnumerable<TaskGroup> GetAllTaskGroups();
     }
 
     public class TaskGroupService : ITaskGroupService
@@ -57,6 +59,12 @@ namespace ToDoAppAPI.Services
             }
             _dbContext.TaskGroups.Remove(taskGroup);
             _dbContext.SaveChanges();
+        }
+
+        public IEnumerable<TaskGroup> GetAllTaskGroups()
+        {
+            var taskGroups = _dbContext.TaskGroups.Include(x => x.Tasks);
+            return taskGroups;
         }
 
     }
