@@ -39,4 +39,31 @@ export class ShowTasksGroupsComponent implements OnInit {
     this.activeAddTaskGroupComponent = false;
     this.taskGroups = this.service.getTaskGroups();
   }
+
+  deleteTaskGroup(item:any)
+  {
+    if(confirm(`Are you sure to delete task group ${item.name}`))
+    {
+      this.service.deleteTaskGroup(item.id).subscribe(res =>
+        {
+          var closeModalBtn = document.getElementById('add-taskgroup-modal-close');
+        if(closeModalBtn)
+        {
+          closeModalBtn.click();
+        }
+        })
+    }
+
+    var showAddSuccess = document.getElementById('delete-taskgroup-success-alert');
+        if(showAddSuccess)
+        {
+          showAddSuccess.style.display = "block";
+        }
+        setTimeout(() => {
+          if(showAddSuccess)
+          {
+            showAddSuccess.style.display="none"
+          }
+        }, 4000);
+  }
 }

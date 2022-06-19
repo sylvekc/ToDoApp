@@ -1,12 +1,15 @@
 #add-user-success-alert,
-#add-taskgroup-success-alert
+#add-taskgroup-success-alert,
+#delete-taskgroup-success-alert
+
 
 {
     display: none;
 }
 
 #add-user-success-alert,
-#add-taskgroup-success-alert
+#add-taskgroup-success-alert,
+#delete-taskgroup-success-alert
 
 {
     animation-name: fadeInAndOut;
