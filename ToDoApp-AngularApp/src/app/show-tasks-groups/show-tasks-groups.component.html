@@ -1,0 +1,12 @@
+<table class="table table-striped">
+    <thead>
+        <th>Group</th>
+        <th>Number of tasks</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of taskGroups|async">
+            <td>{{item.name}}</td>
+            <td>{{item.tasks.length}}</td>
+        </tr>
+    </tbody>
+</table>
