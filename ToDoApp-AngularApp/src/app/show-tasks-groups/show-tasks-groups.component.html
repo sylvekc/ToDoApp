@@ -1,7 +1,12 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary float-end mt-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+<button type="button" class="btn btn-primary float-end mt-2 mx-5" data-bs-toggle="modal" data-bs-target="#addUser">
     Add user
   </button>
+
+  <button type="button" class="btn btn-primary float-end mt-2" data-bs-toggle="modal" data-bs-target="#addTaskGroup">
+    Add task group
+  </button>
+  
   
 
 <table class="table table-striped">
@@ -17,21 +22,25 @@
     </tbody>
 </table>
 
-<div class="alert alert-success" role="alert" id="add-success-alert">
+<div class="alert alert-success" role="alert" id="add-user-success-alert">
   User was created.
+</div>
+
+<div class="alert alert-success" role="alert" id="add-taskgroup-success-alert">
+  Task group was created.
 </div>
 
 
   
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle">Add new user</h5>
           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-             id="add-modal-close">
+            id="add-user-modal-close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -41,3 +50,22 @@
       </div>
     </div>
   </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="addTaskGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Add new task group</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+              (click)="modalClose()" id="add-taskgroup-modal-close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <app-add-group></app-add-group>
+          </div>
+        </div>
+      </div>
+    </div>

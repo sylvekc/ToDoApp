@@ -1,1 +1,11 @@
-<p>add-group works!</p>
+<form #addGroupForm="ngForm" (ngSubmit)= "addGroupForm.resetForm()">
+    <div class="mb-3">
+      <label for="firstname" class="form-label">Name</label>
+      <input type="text" class="form-control" [(ngModel)]="name" name="firstname">
+    </div>
+    <div class="modal-footer">
+      <button (click)="addTaskGroup()"  class="btn btn-success mt-2">
+        Add task group
+      </button>
+    </div>
+  </form>

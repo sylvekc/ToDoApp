@@ -30,7 +30,7 @@ namespace ToDoAppAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddTaskGroup([FromForm]TaskGroupDto dto)
+        public ActionResult AddTaskGroup(TaskGroupDto dto)
         {
             var taskGroupId = _taskGroupService.AddTaskGroup(dto);
             return Created($"/api/taskGroup/{taskGroupId}", null);

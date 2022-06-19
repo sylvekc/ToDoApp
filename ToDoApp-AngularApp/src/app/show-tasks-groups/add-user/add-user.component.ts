@@ -32,13 +32,13 @@ export class AddUserComponent implements OnInit {
 
     this.service.addUser(user).subscribe(res =>
       {
-        var closeModalBtn = document.getElementById('add-modal-close');
+        var closeModalBtn = document.getElementById('add-user-modal-close');
         if(closeModalBtn)
         {
           closeModalBtn.click();
         }
 
-        var showAddSuccess = document.getElementById('add-success-alert');
+        var showAddSuccess = document.getElementById('add-user-success-alert');
         if(showAddSuccess)
         {
           showAddSuccess.style.display = "block";

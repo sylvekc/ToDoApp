@@ -1,4 +1,4 @@
-<form #myForm="ngForm" (ngSubmit)= "myForm.resetForm()">
+<form #addUserForm="ngForm" (ngSubmit)= "addUserForm.resetForm()">
     <div class="mb-3">
       <label for="firstname" class="form-label">First name</label>
       <input type="text" class="form-control" [(ngModel)]="firstname" name="firstname">

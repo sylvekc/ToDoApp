@@ -1,9 +1,13 @@
-#add-success-alert
+#add-user-success-alert,
+#add-taskgroup-success-alert
+
 {
     display: none;
 }
 
-#add-success-alert
+#add-user-success-alert,
+#add-taskgroup-success-alert
+
 {
     animation-name: fadeInAndOut;
     animation-duration: 4s;

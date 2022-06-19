@@ -20,5 +20,23 @@ export class ShowTasksGroupsComponent implements OnInit {
   }
 
 
+  user:any;
+  taskgroup:any;
+  activeAddTaskGroupComponent:boolean = false;
 
+  modalAdd()
+  {
+    this.user = 
+    {
+      firstname:null,
+      lastname:null,
+    }
+    this.activeAddTaskGroupComponent = true;
+  }
+
+  modalClose()
+  {
+    this.activeAddTaskGroupComponent = false;
+    this.taskGroups = this.service.getTaskGroups();
+  }
 }
