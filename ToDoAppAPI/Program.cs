@@ -25,6 +25,7 @@ builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IValidator<TaskDto>, AddTaskDtoValidator>();
 builder.Services.AddScoped<IValidator<TaskGroupDto>, TaskGroupDtoValidator>();
+builder.Services.AddScoped<IValidator<UserDto>, AddUserDtoValidator>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddCors(options =>
 {

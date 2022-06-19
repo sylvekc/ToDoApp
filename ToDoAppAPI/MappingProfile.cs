@@ -15,6 +15,7 @@ namespace ToDoAppAPI
         {
             CreateMap<TaskGroupDto, TaskGroup>();
             CreateMap<TaskDto, Entities.Task>();
+            CreateMap<UserDto, User>();
         }
     }
 }

@@ -1,1 +1,15 @@
-<p>add-user works!</p>
+<form #myForm="ngForm" (ngSubmit)= "myForm.resetForm()">
+    <div class="mb-3">
+      <label for="firstname" class="form-label">First name</label>
+      <input type="text" class="form-control" [(ngModel)]="firstname" name="firstname">
+    </div>
+    <div class="mb-3">
+      <label for="lastname" class="form-label">Last name</label>
+      <input type="text" class="form-control" [(ngModel)]="lastname" name="lastname">
+    </div>
+    <div class="modal-footer">
+      <button (click)="addUser()"  class="btn btn-success mt-2">
+        Add user
+      </button>
+    </div>
+  </form>

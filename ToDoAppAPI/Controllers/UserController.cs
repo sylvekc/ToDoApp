@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using ToDoAppAPI.Entities;
+using ToDoAppAPI.Models;
 using ToDoAppAPI.Services;
 
 namespace ToDoAppAPI.Controllers
@@ -26,5 +28,14 @@ namespace ToDoAppAPI.Controllers
             var users = _userService.GetAllUsers();
             return Ok(users);
         }
+
+        [HttpPost]
+        public ActionResult AddUser(UserDto dto)
+        {
+            _userService.AddUser(dto);
+            return Ok();
+        }
+
+
     }
 }
