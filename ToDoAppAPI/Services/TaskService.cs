@@ -14,9 +14,10 @@ namespace ToDoAppAPI.Services
 {
     public interface ITaskService
     {
-        int AddTask(AddTaskDto dto);
+        int AddTask(TaskDto dto);
         void DeleteTask(int id);
         IEnumerable<Entities.Task> GetAllTasks();
+        void UpdateTask(TaskDto dto, int id);
     }
 
     public class TaskService : ITaskService
@@ -30,10 +31,9 @@ namespace ToDoAppAPI.Services
             _mapper = mapper;
         }
 
-        public int AddTask(AddTaskDto dto)
+        public int AddTask(TaskDto dto)
         {
             var task = _mapper.Map<Entities.Task>(dto);
-            task.Status = dto.Status.ToUpper();
             _dbContext.Tasks.Add(task);
             _dbContext.SaveChanges();
             return task.Id;
@@ -54,6 +54,24 @@ namespace ToDoAppAPI.Services
         {
             var tasks = _dbContext.Tasks;
             return tasks;
+        }
+
+        public void UpdateTask(TaskDto dto, int id)
+        {
+            var task = _dbContext.Tasks.FirstOrDefault(x => x.Id == id);
+            
+            if (task == null)
+            {
+                throw new NotFoundException($"Task with ID {id} not found");
+            }
+
+            task.Status = dto.Status;
+            task.Deadline = dto.Deadline;
+            task.Description = dto.Description;
+            task.TaskGroupId = dto.TaskGroupId;
+            task.UserId = dto.UserId;
+
+            _dbContext.SaveChanges();
         }
 
     }

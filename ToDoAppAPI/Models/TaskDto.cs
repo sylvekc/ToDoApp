@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToDoAppAPI.Models
 {
-    public class AddTaskDto
+    public class TaskDto
     {
         public string Description { get; set; }
         public DateTime Deadline { get; set; }

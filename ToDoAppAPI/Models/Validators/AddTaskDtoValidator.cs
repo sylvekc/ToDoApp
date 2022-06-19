@@ -8,7 +8,7 @@ using ToDoAppAPI.Entities;
 
 namespace ToDoAppAPI.Models.Validators
 {
-    public class AddTaskDtoValidator : AbstractValidator<AddTaskDto>
+    public class AddTaskDtoValidator : AbstractValidator<TaskDto>
     {
        
         private string[] possibleStatus = new[] { "New", "InProgress", "Completed" };

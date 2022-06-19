@@ -14,7 +14,7 @@ namespace ToDoAppAPI
         public MappingProfile()
         {
             CreateMap<TaskGroupDto, TaskGroup>();
-            CreateMap<AddTaskDto, Entities.Task>();
+            CreateMap<TaskDto, Entities.Task>();
         }
     }
 }

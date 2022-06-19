@@ -28,7 +28,7 @@ namespace ToDoAppAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddTask([FromForm] AddTaskDto dto)
+        public ActionResult AddTask([FromForm] TaskDto dto)
         {
             var taskId = _taskService.AddTask(dto);
             return Created($"/api/task/{taskId}", null);
@@ -41,6 +41,13 @@ namespace ToDoAppAPI.Controllers
             return NoContent();
         }
 
-        
+        [HttpPatch("{id}")]
+        public ActionResult UpdateTask([FromForm] TaskDto dto, [FromRoute] int id)
+        {
+            _taskService.UpdateTask(dto, id);
+            return Ok();
+        }
+
+
     }
 }
