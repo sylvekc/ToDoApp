@@ -17,6 +17,7 @@ namespace ToDoAppAPI.Entities
         public DbSet<Task> Tasks { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<TaskGroup> TaskGroups { get; set; }
+        public DbSet<Status> Status { get; set; }
     }
 
 }

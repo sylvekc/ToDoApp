@@ -33,6 +33,13 @@ namespace ToDoAppAPI
                     _dbContext.TaskGroups.AddRange(taskGroups);
                     _dbContext.SaveChanges();
                 }
+
+                if (!_dbContext.Status.Any())
+                {
+                    var status = GetStatus();
+                    _dbContext.Status.AddRange(status);
+                    _dbContext.SaveChanges();
+                }
             }
         }
 
@@ -42,8 +49,8 @@ namespace ToDoAppAPI
             {
                 new User()
                 {
-                    FirstName = "Łukasz",
-                    LastName = "Pudełko"
+                    FirstName = "Unassigned",
+                    LastName = ""
                 },
 
                 new User()
@@ -79,6 +86,26 @@ namespace ToDoAppAPI
                 }
             };
             return taskGroups;
+        }
+
+        private IEnumerable<Status> GetStatus()
+        {
+            var status = new List<Status>()
+            {
+                new Status()
+                {
+                    Name = "New"
+                },
+                new Status()
+                {
+                    Name = "InProgress"
+                },
+                new Status()
+                {
+                    Name = "Completed"
+                }
+            };
+            return status;
         }
 
     }
