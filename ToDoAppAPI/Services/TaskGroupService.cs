@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ToDoAppAPI.Entities;
@@ -35,6 +36,7 @@ namespace ToDoAppAPI.Services
         public int AddTaskGroup(TaskGroupDto dto)
         {
             var taskGroup = _mapper.Map<TaskGroup>(dto);
+            taskGroup.Name = dto.Name[0].ToString().ToUpper() + dto.Name.Substring(1);
             _dbContext.TaskGroups.Add(taskGroup);
             _dbContext.SaveChanges();
             return taskGroup.Id;

@@ -45,7 +45,7 @@ export class ShowTasksGroupsComponent implements OnInit {
 
   deleteTaskGroup(item:any)
   {
-    if(confirm(`Are you sure to delete task group ${item.name}`))
+    if(window.confirm(`Are you sure to delete task group: ${item.name}?`))
     {
       this.service.deleteTaskGroup(item.id).subscribe(res =>
         {
@@ -55,9 +55,8 @@ export class ShowTasksGroupsComponent implements OnInit {
           closeModalBtn.click();
         }
         })
-    }
 
-    var showAddSuccess = document.getElementById('delete-taskgroup-success-alert');
+        var showAddSuccess = document.getElementById('delete-taskgroup-success-alert');
         if(showAddSuccess)
         {
           showAddSuccess.style.display = "block";
@@ -69,6 +68,7 @@ export class ShowTasksGroupsComponent implements OnInit {
           }
         }, 4000);
   }
+}
 
 
   sort(headerName:string)
