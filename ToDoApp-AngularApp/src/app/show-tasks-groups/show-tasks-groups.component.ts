@@ -12,9 +12,12 @@ export class ShowTasksGroupsComponent implements OnInit {
 
 
   taskGroups!:Observable<any[]>;
+  orderHeader: string='';
+  reverse: boolean = false;
+
 
   constructor(private service:ToDoAppService) { }
-
+ 
   ngOnInit(): void {
     this.taskGroups = this.service.getTaskGroups();
   }
@@ -66,4 +69,13 @@ export class ShowTasksGroupsComponent implements OnInit {
           }
         }, 4000);
   }
+
+
+  sort(headerName:string)
+  {
+    this.orderHeader = headerName;
+    this.reverse = !this.reverse;
+  }
+
+
 }

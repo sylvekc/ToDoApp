@@ -5,9 +5,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ShowTasksGroupsComponent } from './show-tasks-groups/show-tasks-groups.component';
-import { AddGroupComponent } from './show-tasks-groups/add-group/add-group.component';
+import { AddGroupComponent } from './show-tasks-groups/add-delete-group/add-group.component';
 import { AddUserComponent } from './show-tasks-groups/add-user/add-user.component';
 import { ToDoAppService } from './to-do-app.service';
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ToDoAppService } from './to-do-app.service';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OrderModule
   ],
   providers: [ToDoAppService],
   bootstrap: [AppComponent]

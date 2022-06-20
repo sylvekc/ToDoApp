@@ -1,8 +1,6 @@
 #add-user-success-alert,
 #add-taskgroup-success-alert,
 #delete-taskgroup-success-alert
-
-
 {
     display: none;
 }
@@ -28,4 +26,9 @@
     0% {opacity: 0;}
     50% {opacity: 1;}
     100% {opacity: 0;}
+}
+
+.pointer
+{
+    cursor: pointer;
 }
