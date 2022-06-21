@@ -1,5 +1,3 @@
-import { formatCurrency } from '@angular/common';
-import { identifierName } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { ToDoAppService } from 'src/app/to-do-app.service';
 @Component({
@@ -17,7 +15,8 @@ export class AddUserComponent implements OnInit {
   lastname: string= "";
 
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
     this.firstname = this.user.firstname;
     this.lastname = this.user.lastname;
   }

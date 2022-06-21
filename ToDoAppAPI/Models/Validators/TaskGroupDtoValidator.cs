@@ -12,7 +12,7 @@ namespace ToDoAppAPI.Models.Validators
     {
         public TaskGroupDtoValidator(ToDoAppDbContext dbContext)
         {
-            RuleFor(x => x.Name).Custom((value, context) =>
+            RuleFor(x => x.Name).NotEmpty().Custom((value, context) =>
             {
                 var isGroupNameExist = dbContext.TaskGroups.Any(x => x.Name == value);
                 if (isGroupNameExist)

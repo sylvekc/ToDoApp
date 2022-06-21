@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ToDoAppAPI.Entities;
+using ToDoAppAPI.Models;
+using Task = System.Threading.Tasks.Task;
 
 namespace ToDoAppAPI
 {
@@ -38,6 +40,13 @@ namespace ToDoAppAPI
                 {
                     var status = GetStatus();
                     _dbContext.Status.AddRange(status);
+                    _dbContext.SaveChanges();
+                }
+
+                if (!_dbContext.Tasks.Any())
+                {
+                    var tasks = GetTasks();
+                    _dbContext.Tasks.AddRange(tasks);
                     _dbContext.SaveChanges();
                 }
             }
@@ -106,6 +115,67 @@ namespace ToDoAppAPI
                 }
             };
             return status;
+        }
+
+        private IEnumerable<Entities.Task> GetTasks()
+        {
+            var tasks = new List<Entities.Task>()
+            {
+                new Entities.Task()
+                {
+                    UserId = 2,
+                    Description = "Add validators",
+                    Status = "New",
+                    TaskGroupId = 1,
+                    Deadline = new DateTime(2022-7-12)
+                },
+                new Entities.Task()
+
+                {
+                    UserId = 3,
+                    Description = "Add new components",
+                    Status = "New",
+                    TaskGroupId = 2,
+                    Deadline = new DateTime(2022-7-14)
+                },
+
+                new Entities.Task()
+                {
+                    UserId = 3,
+                    Description = "Add new features",
+                    Status = "InProgress",
+                    TaskGroupId = 2,
+                    Deadline = new DateTime(2022-7-19)
+                },
+
+                new Entities.Task()
+                {
+                    UserId = 2,
+                    Description = "Add new queries",
+                    Status = "Completed",
+                    TaskGroupId = 3,
+                    Deadline = new DateTime(2022-8-11)
+                },
+
+                new Entities.Task()
+                {
+                    UserId = 2,
+                    Description = "Add new functions",
+                    Status = "New",
+                    TaskGroupId = 3,
+                    Deadline = new DateTime(2022-6-30)
+                },
+
+                new Entities.Task()
+                {
+                    UserId = 2,
+                    Description = "Check if everything is working",
+                    Status = "InProgress",
+                    TaskGroupId = 3,
+                    Deadline = new DateTime(2022-12-12)
+                },
+            };
+            return tasks;
         }
 
     }

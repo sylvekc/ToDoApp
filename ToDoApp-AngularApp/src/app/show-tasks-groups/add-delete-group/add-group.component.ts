@@ -11,11 +11,13 @@ export class AddGroupComponent implements OnInit {
   constructor(private service:ToDoAppService) { }
 
 
-  @Input() taskgroup:any;
+  @Input() 
+  taskgroup:any;
   name: string= "";
 
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
     this.name = this.taskgroup.name;
   }
 

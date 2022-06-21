@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToDoAppService } from '../to-do-app.service';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
-
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-show-add-delete-task',
   templateUrl: './show-add-delete-task.component.html',
@@ -16,7 +16,6 @@ export class ShowAddDeleteTaskComponent implements OnInit {
   statusList!:Observable<any[]>;
   userList:any=[];
   userNames:any=[];
-
   userMap:Map<number,string> = new Map();
 
   constructor(private route: ActivatedRoute, private service: ToDoAppService) { }
@@ -25,113 +24,191 @@ export class ShowAddDeleteTaskComponent implements OnInit {
   task:any;
   status: string="";
   description: string="";
-  deadline: any;
+  deadline:any;
   userId!: number;
   user: string="";
   taskGroupId!: number;
   minDate:any;
-  activeAddTaskGroupComponent:boolean=false;
+  taskId!:number;
+  taskGroupName:string="";
 
-
-
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
 
     this.statusList = this.service.getStatusList();
     this.userList = this.service.getUserList();
-    
     this.id = this.route.snapshot.params['groupId']
     this.getTaskGroup();
     this.refreshUserMap();
-
     const datePipe = new DatePipe('en-Us');
     this.minDate = datePipe.transform(new Date(), 'yyy-MM-dd');
-
-    this.status = this.task.status;
-    this.description = this.task.description;
-    this.deadline = this.task.deadline;
-    this.taskGroupId = this.task.taskGroupId;
-    this.userId = this.task.userId;
-
   }
 
-      getTaskGroup()
-      {
-        this.service.getTaskGroupById(this.id).subscribe(res =>
-          {
-            this.taskGroup = res;
-          })
-      }
-
-      addTask()
-      {
-        var task = 
+    getTaskGroup()
+    {
+      this.service.getTaskGroupById(this.id).subscribe(res =>
         {
-          status:this.status,
-          description:this.description,
-          deadline:this.deadline,
-          userId:this.userId,
-          taskGroupId:this.id,
+          this.taskGroup = res;
+        })
+    }
+
+    addTask()
+    {
+      var task = 
+      {
+        status:this.status,
+        description:this.description,
+        deadline:this.deadline,
+        userId:this.userId,
+        taskGroupId:this.id,
+      }
+      this.service.addTask(task).subscribe(res =>
+        {
+          var closeModalBtn = document.getElementById('add-task-modal-close');
+        if(closeModalBtn)
+        {
+          closeModalBtn.click();
         }
-        this.service.addTask(task).subscribe(res =>
+          this.getTaskGroup();
+          var showAddSuccess = document.getElementById('add-task-success-alert');
+          if(showAddSuccess)
           {
-            this.getTaskGroup();
-            var showAddSuccess = document.getElementById('add-task-success-alert');
+            showAddSuccess.style.display = "block";
+          }
+          setTimeout(function() 
+          {
             if(showAddSuccess)
             {
-              showAddSuccess.style.display = "block";
+              showAddSuccess.style.display = "none";
             }
-            setTimeout(function() 
-            {
-              if(showAddSuccess)
-              {
-                showAddSuccess.style.display = "none";
-              }
-            }, 4000);
+          }, 4000);
+        })
+    }
+
+    deleteTask(task:any)
+    {
+      if(window.confirm(`Are you sure to delete this task?`))
+      {
+        this.service.deleteTask(task.id).subscribe(res =>
+          {
+            this.getTaskGroup();
+            
           })
 
-
-      }
-
-      deleteTask(task:any)
-  {
-    if(window.confirm(`Are you sure to delete this task?`))
-    {
-      this.service.deleteTask(task.id).subscribe(res =>
-        {
-          this.getTaskGroup();
-          
-        })
-
-        var showDeleteSuccess = document.getElementById('delete-task-success-alert');
-        if(showDeleteSuccess)
-        {
-          showDeleteSuccess.style.display = "block";
-        }
-        setTimeout(() => {
+          var showDeleteSuccess = document.getElementById('delete-task-success-alert');
           if(showDeleteSuccess)
           {
-            showDeleteSuccess.style.display="none"
+            showDeleteSuccess.style.display = "block";
+          }
+          setTimeout(() => {
+            if(showDeleteSuccess)
+            {
+              showDeleteSuccess.style.display="none"
+            }
+          }, 4000);
+      }
+    }
+
+    editTask()
+    {
+      var task = 
+      {
+        id:this.taskId,
+        status:this.status,
+        description:this.description,
+        deadline:this.deadline,
+        userId:this.userId,
+        taskGroupId:this.id,
+      }
+      var id:number = this.task.id;
+      this.service.editTask(id, task).subscribe(res =>
+        {
+          var closeModalBtn = document.getElementById('edit-task-modal-close');
+        if(closeModalBtn)
+        {
+          closeModalBtn.click();
+        }
+        })
+
+        var showAddSuccess = document.getElementById('edit-task-success-alert');
+        if(showAddSuccess)
+        {
+          showAddSuccess.style.display = "block";
+        }
+        setTimeout(() => {
+          if(showAddSuccess)
+          {
+            showAddSuccess.style.display="none"
           }
         }, 4000);
+    }
 
-  }
-}
-modalClose()
-  {
-    this.activeAddTaskGroupComponent = false;
-  }
+    editTaskGroupName()
+    {
+    var taskgroup = 
+    {
+      name:this.taskGroupName
+    }
 
-  refreshUserMap()
-  {
-    this.service.getUserList().subscribe(data =>
+    this.service.editTaskGroup(this.id, taskgroup).subscribe(res =>
       {
-        this.userNames = data
-        for(let i=0; i<data.length; i++)
+        var closeModalBtn = document.getElementById('edit-taskGroupName-modal-close');
+        if(closeModalBtn)
         {
-          this.userMap.set(this.userNames[i].id, this.userNames[i].firstName);
+          closeModalBtn.click();
         }
-      })
 
-  }
+        var showAddSuccess = document.getElementById('edit-taskGroupName-success-alert');
+        if(showAddSuccess)
+        {
+          showAddSuccess.style.display = "block";
+        }
+        setTimeout(() => {
+          if(showAddSuccess)
+          {
+            showAddSuccess.style.display="none"
+          }
+        }, 4000);
+      })
+    }
+
+    taskGroupNameModal()
+    { 
+      this.taskGroupName = this.taskGroup.name;
+    }
+
+    modalClose()
+    {
+      this.getTaskGroup();
+    }
+
+    modalEditTask(item:any)
+    {
+      this.task = item
+      this.status = this.task.status;
+      this.description = this.task.description;
+      this.deadline = this.task.deadline;
+      this.taskGroupId = this.task.taskGroupId;
+      this.userId = this.task.userId;
+      this.taskId = this.task.id;
+    }
+
+    refreshUserMap()
+    {
+      this.service.getUserList().subscribe(data =>
+        {
+          this.userNames = data
+          for(let i=0; i<data.length; i++)
+          {
+            this.userMap.set(this.userNames[i].id, this.userNames[i].firstName);
+          }
+        })
+    }
+
+    clearForm(form: NgForm) 
+    {
+      form.reset();
+    }
+
 
 }

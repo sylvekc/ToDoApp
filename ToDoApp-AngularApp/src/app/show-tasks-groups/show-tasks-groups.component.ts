@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { fakeAsync } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { ToDoAppService } from '../to-do-app.service';
 
@@ -14,32 +13,20 @@ export class ShowTasksGroupsComponent implements OnInit {
   taskGroups!:Observable<any[]>;
   orderHeader: string='';
   reverse: boolean = false;
+  user:any;
+  taskgroup:any;
 
 
   constructor(private service:ToDoAppService) { }
  
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
     this.taskGroups = this.service.getTaskGroups();
   }
 
 
-  user:any;
-  taskgroup:any;
-  activeAddTaskGroupComponent:boolean = false;
-
-  modalAdd()
-  {
-    this.user = 
-    {
-      firstname:null,
-      lastname:null,
-    }
-    this.activeAddTaskGroupComponent = true;
-  }
-
   modalClose()
   {
-    this.activeAddTaskGroupComponent = false;
     this.taskGroups = this.service.getTaskGroups();
   }
 
@@ -69,7 +56,6 @@ export class ShowTasksGroupsComponent implements OnInit {
         }, 4000);
   }
 }
-
 
   sort(headerName:string)
   {

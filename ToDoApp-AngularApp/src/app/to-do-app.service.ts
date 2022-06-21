@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs';
-import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +47,7 @@ export class ToDoAppService {
     return this.http.delete(this.ToDoAppAPIUrl + `/taskGroup/${id}`);
   }
 
-  updateTaskGroup(id:number|string, data:any)
+  editTaskGroup(id:number|string, data:any)
   {
     return this.http.patch(this.ToDoAppAPIUrl + `/taskGroup/${id}`,data)
   }
@@ -69,6 +67,11 @@ export class ToDoAppService {
   deleteTask(id:number|string)
   {
     return this.http.delete(this.ToDoAppAPIUrl + `/task/${id}`);
+  }
+
+  editTask(id:number|string, data:any)
+  {
+    return this.http.patch(this.ToDoAppAPIUrl + `/task/${id}`, data);
   }
 
   ///STATUS

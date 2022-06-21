@@ -11,8 +11,6 @@ import { AddUserComponent } from './show-tasks-groups/add-user/add-user.componen
 import { ToDoAppService } from './to-do-app.service';
 import { OrderModule } from 'ngx-order-pipe';
 import { ShowAddDeleteTaskComponent } from './show-add-delete-task/show-add-delete-task.component';
-import { EditTaskComponent } from './show-add-delete-task/edit-task/edit-task.component';
-import { EditGroupNameComponent } from './show-add-delete-task/edit-group-name/edit-group-name.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +19,6 @@ import { EditGroupNameComponent } from './show-add-delete-task/edit-group-name/e
     AddGroupComponent,
     AddUserComponent,
     ShowAddDeleteTaskComponent,
-    EditTaskComponent,
-    EditGroupNameComponent,
   ],
   imports: [
     BrowserModule,

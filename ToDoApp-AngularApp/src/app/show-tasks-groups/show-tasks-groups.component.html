@@ -1,94 +1,91 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary float-end mt-2 mx-5" data-bs-toggle="modal" data-bs-target="#addUser">
-    Add user
-  </button>
+<div class="container w-75">
+    <button type="button" class="btn btn-success float-end mt-4 mx-5 mb-3" data-bs-toggle="modal" data-bs-target="#addUser">
+        Add user
+      </button>
 
-  <button type="button" class="btn btn-primary float-end mt-2" data-bs-toggle="modal" data-bs-target="#addTaskGroup">
-    Add task group
-  </button>
-  
-  
+      <button type="button" class="btn btn-success float-end mt-4 mb-3" data-bs-toggle="modal" data-bs-target="#addTaskGroup">
+        Add task group
+      </button>
+      
+      
 
-<table class="table table-striped">
-    <thead>
-        <th (click)="sort('name')" class="pointer">Group<i class="fa fa-sort pointer" aria-hidden="true"></i></th>
-        <th (click)="sort('number')" class="pointer">Number of tasks <i class="fa fa-sort pointer" aria-hidden="true"></i></th>
-        <th>Options</th>
+    <table class="table table-hover table-bordered fa-border">
+        <thead>
+            <th class="text-center" (click)="sort('name')">Task group name<i class="fa fa-sort pointer" aria-hidden="true"></i></th>
+            <th class="text-center" (click)="sort('tasks')">Number of tasks <i class="fa fa-sort pointer" aria-hidden="true"></i></th>
+            <th class="text-center">Options</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of taskGroups |async | orderBy:orderHeader: reverse">
+                <td>{{item.name}}</td>
+                <td class="text-center" text-center>{{item.tasks.length}}</td>
+                <td class="text-center">
+                  <a [routerLink]="['/edit', item.id]"><button class="btn btn-outline-primary me-2 mb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg>
+                  </button></a>
+                  <button class="btn btn-outline-danger me-2 mb-1"
+                    (click)="deleteTaskGroup(item)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                  </button>
+                
+                </td>
 
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of taskGroups|async | orderBy:orderHeader: reverse">
-            <td>{{item.name}}</td>
-            <td>{{item.tasks.length}}</td>
-            <td>
-               <a [routerLink]="['/edit', item.id]"><button class="btn btn-outline-primary me-2 mb-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                </svg>
-              </button></a>
-              <button class="btn btn-outline-danger me-2 mb-1"
-                (click)="deleteTaskGroup(item)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                </svg>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Alerts -->
+    <div class="alert alert-success text-center" role="alert" id="add-user-success-alert">
+      User was created.
+    </div>
+
+    <div class="alert alert-success text-center" role="alert" id="add-taskgroup-success-alert">
+      Task group was created.
+    </div>
+
+    <div class="alert alert-success text-center" role="alert" id="delete-taskgroup-success-alert">
+      Task group was deleted.
+    </div>
+
+      <!-- Add user modal -->
+      <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Add new user</h5>
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                id="add-user-modal-close">
+                <span aria-hidden="true">&times;</span>
               </button>
-            
-            </td>
-
-        </tr>
-    </tbody>
-</table>
-
-<div class="alert alert-success" role="alert" id="add-user-success-alert">
-  User was created.
-</div>
-
-<div class="alert alert-success" role="alert" id="add-taskgroup-success-alert">
-  Task group was created.
-</div>
-
-<div class="alert alert-success" role="alert" id="delete-taskgroup-success-alert">
-  Task group was deleted.
-</div>
-
-
-  
-
-  <!-- Modal -->
-  <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Add new user</h5>
-          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-            id="add-user-modal-close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <app-add-user></app-add-user>
+            </div>
+            <div class="modal-body">
+              <app-add-user></app-add-user>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
+        <!-- Add task group modal -->
+        <div class="modal fade" id="addTaskGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add new task group</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                  (click)="modalClose()" id="add-taskgroup-modal-close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <app-add-group></app-add-group>
+              </div>
+            </div>
+          </div>
+        </div>
   </div>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="addTaskGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Add new task group</h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-              (click)="modalClose()" id="add-taskgroup-modal-close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <app-add-group></app-add-group>
-          </div>
-        </div>
-      </div>
-    </div>
