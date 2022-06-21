@@ -19,6 +19,7 @@ namespace ToDoAppAPI.Services
         void UpdateTaskGroup(TaskGroupDto dto, int id);
         void DeleteTaskGroup(int id);
         IEnumerable<TaskGroup> GetAllTaskGroups();
+        TaskGroup GetTaskGroupById(int id);
     }
 
     public class TaskGroupService : ITaskGroupService
@@ -68,6 +69,17 @@ namespace ToDoAppAPI.Services
         {
             var taskGroups = _dbContext.TaskGroups.Include(x => x.Tasks);
             return taskGroups;
+        }
+
+        public TaskGroup GetTaskGroupById(int id)
+        {
+            var taskGroup = _dbContext.TaskGroups.Include(x => x.Tasks).FirstOrDefault(x => x.Id == id);
+            if (taskGroup is null)
+            {
+                throw new NotFoundException($"Task group with id {id} doesn't exist.");
+            }
+
+            return taskGroup;
         }
 
     }

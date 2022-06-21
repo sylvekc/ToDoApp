@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs';
+import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +20,23 @@ export class ToDoAppService {
     return this.http.post(this.ToDoAppAPIUrl + '/user', data);
   }
 
+  getUserList():Observable<any[]>
+  {
+    return this.http.get<any>(this.ToDoAppAPIUrl + '/user');
+  }
+
 
 
 ///TaskGroup
   getTaskGroups():Observable<any[]>
   {
     return this.http.get<any>(this.ToDoAppAPIUrl + '/taskGroup');
+  }
+
+  getTaskGroupById(id:number|string)
+  {
+    return this.http.get(this.ToDoAppAPIUrl + `/taskGroup/${id}`);
+
   }
 
   addTaskGroup(data:any) 
@@ -57,4 +70,13 @@ export class ToDoAppService {
   {
     return this.http.delete(this.ToDoAppAPIUrl + `/task/${id}`);
   }
+
+  ///STATUS
+
+  getStatusList():Observable<any[]>
+  {
+    return this.http.get<any>(this.ToDoAppAPIUrl + '/status');
+  }
+
+
 }

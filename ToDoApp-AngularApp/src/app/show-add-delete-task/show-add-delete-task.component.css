@@ -1,0 +1,36 @@
+#add-task-success-alert,
+#edit-task-success-alert,
+#edit-taskGroupName-success-alert,
+#delete-task-success-alert
+{
+    display: none;
+}
+
+#add-task-success-alert,
+#edit-task-success-alert,
+#edit-taskGroupName-success-alert,
+#delete-task-success-alert
+
+{
+    animation-name: fadeInAndOut;
+    animation-duration: 4s;
+}
+
+@-webkit-keyframes fadeInAndOut
+{
+    0% {opacity: 0;}
+    50% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@keyframes fadeInAndOut
+{
+    0% {opacity: 0;}
+    50% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+.pointer
+{
+    cursor: pointer;
+}

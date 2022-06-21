@@ -37,7 +37,7 @@ namespace ToDoAppAPI.Controllers
         }
 
         [HttpPatch("{id}")]
-        public ActionResult ChangeTaskGroupName([FromForm]TaskGroupDto dto, [FromRoute]int id)
+        public ActionResult ChangeTaskGroupName(TaskGroupDto dto, [FromRoute]int id)
         {
             _taskGroupService.UpdateTaskGroup(dto, id);
             return Ok();
@@ -48,6 +48,13 @@ namespace ToDoAppAPI.Controllers
         {
             _taskGroupService.DeleteTaskGroup(id);
             return NoContent();
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult GetTaskGroupById(int id)
+        {
+            var taskGroup = _taskGroupService.GetTaskGroupById(id);
+            return Ok(taskGroup);
         }
 
      
